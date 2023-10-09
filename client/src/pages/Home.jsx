@@ -7,7 +7,7 @@ const Home = () => {
                 <title>Persevernce</title>
             </Helmet>
             
-            <h1 className="text-3xl font-bold">
+            <h1 className="text-3xl font-bold text-white">
                 Perseverence
             </h1>
         </>
