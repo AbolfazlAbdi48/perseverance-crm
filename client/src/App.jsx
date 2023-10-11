@@ -1,6 +1,7 @@
 import { Route, Routes } from "react-router-dom"
 import { Home } from "./pages"
 import Sidebar from "./components/Sidebar/Sidebar"
+import { Navbar } from "./components"
 
 const App = () => {
   return (
@@ -12,6 +13,8 @@ const App = () => {
         </aside>
 
         <main className="flex-1 max-sm:w-full max-w-[1280px] mx-auto sm:pr-5">
+          <Navbar />
+
           <Routes>
             <Route path="/" element={<Home />} />
           </Routes>
