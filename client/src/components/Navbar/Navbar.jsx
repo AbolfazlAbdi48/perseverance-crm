@@ -1,10 +1,14 @@
-import { Link } from "react-router-dom";
-import { menu, payment, profile, search } from "../../assets";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import { useState } from "react";
+import { menu, payment, profile, search } from "../../assets";
+import { navlinks } from "../../constants/navlinks";
 import CustomButton from "../buttons/CustomButton";
 
 const Navbar = () => {
-    const [toggleDrawer, setToggleDrawer] = useState(false)
+    const navigate = useNavigate()
+    const location = useLocation()
+    const [isActive, setIsActive] = useState(location.pathname)
+    const [toggleDrawer, setToggleDrawer] = useState(true)
 
     return (
         <div
@@ -54,40 +58,28 @@ const Navbar = () => {
                 >
                     <ul className="mb-4">
                         {/* items */}
-                        {/* <li
-                        key={index}
-                        className={`flex p-4 ${isActive === link.name && 'bg-[#3a3a43]'} rounded-[10px] mx-2`}
-                        onClick={() => {
-                            setIsActive(link.name)
-                            setToggleDrawer(!toggleDrawer)
-                            navigate(link.link)
-                        }}
-                    >
-                        <img
-                            src={link.imgUrl}
-                            alt={link.name}
-                            className={`w-[24px] h-[24px] object-contain ${isActive == link.name ? "grayscale-0" : "grayscale"}`}
-                        />
-                        <p className={`mr-[15px] font-semibold text-[14px] ${isActive == link.name ? "text-[#1dc071]" : "text-[#808191]"}`}>
-                            {link.name}
-                        </p>
-                    </li> */}
-                        <li
-                            key={1}
-                            className={`flex p-4 'bg-[#3a3a43]' rounded-[10px] mx-2`}
-                            onClick={() => {
-                                alert('hello')
-                            }}
-                        >
-                            <img
-                                src={payment}
-                                alt={'test'}
-                                className={`w-[24px] h-[24px] object-contain grayscale-0`}
-                            />
-                            <p className={`mr-[15px] font-semibold text-[14px] text-[#1dc071]`}>
-                                {'پرداخت'}
-                            </p>
-                        </li>
+                        {
+                            navlinks?.map((link, index) => (
+                                <li
+                                    key={index}
+                                    className={`flex p-4 ${isActive === link.link && 'bg-[#3a3a43]'} rounded-[10px] mx-2`}
+                                    onClick={() => {
+                                        setIsActive(link.link)
+                                        setToggleDrawer(!toggleDrawer)
+                                        navigate(link.link)
+                                    }}
+                                >
+                                    <img
+                                        src={link.imgUrl}
+                                        alt={link.name}
+                                        className={`w-[24px] h-[24px] object-contain ${isActive == link.link ? "grayscale-0" : "grayscale"}`}
+                                    />
+                                    <p className={`mr-[15px] font-semibold text-[14px] ${isActive == link.link ? "text-[#1dc071]" : "text-[#808191]"}`}>
+                                        {link.name}
+                                    </p>
+                                </li>
+                            ))
+                        }
                     </ul>
                     <div className="flex mx-4">
                         <CustomButton
